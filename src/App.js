@@ -9,8 +9,6 @@ import Register from "./components/register.component";
 function App() {
   return (
     <Router>
-      <p>ypxs</p>
-
       <div className="container">
         <Navbar />
         <br />
