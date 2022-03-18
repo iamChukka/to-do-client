@@ -1,3 +1,6 @@
+import axios from "axios";
+import { Routes, Route } from "react-router-dom";
+
 import React, { Component } from "react";
 
 export default class Login extends Component {
@@ -27,15 +30,21 @@ export default class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
-      name: this.state.name,
+    const login = {
       email: this.state.email,
       password: this.state.password,
     };
 
-    console.log(user);
+    console.log(login);
 
-    //window.location = "/";
+    axios
+      .post("http://localhost:3001/api/auth", login)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data);
+        window.location = "/";
+      })
+      .catch((err) => console.log(err.response));
   }
 
   render() {
@@ -69,7 +78,7 @@ export default class Login extends Component {
                 type="submit"
                 required
                 className="btn btn-primary"
-                value="Register"
+                value="Login"
               />
             </div>
           </form>
