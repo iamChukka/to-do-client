@@ -7,11 +7,13 @@ export default class Home extends Component {
     super(props);
     this.getUser = this.getUser.bind(this);
     this.getTable = this.getTable.bind(this);
-
+    this.createTodo = this.createTodo.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.onChangeTodo = this.onChangeTodo.bind(this);
     this.state = {
       user: null,
       table: null,
+      todo: "",
     };
   }
 
@@ -62,6 +64,29 @@ export default class Home extends Component {
       })
       .catch((error) => console.log(error.response));
   }
+
+  createTodo() {
+    const accessToken = localStorage.getItem("token");
+    const todo = {
+      name: this.state.todo,
+    };
+    axios
+      .post("http://localhost:3001/api/todos", todo, {
+        headers: {
+          "x-auth-token": accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error.response));
+    window.location = "/";
+  }
+  onChangeTodo(e) {
+    this.setState({
+      todo: e.target.value,
+    });
+  }
   render() {
     //console.log("my user " + this.state.user);
 
@@ -71,11 +96,36 @@ export default class Home extends Component {
           <div className="container">
             <div className="row justify-content-sm-center">
               <h2>Welcome Home {this.state.user && this.state.user.name}</h2>
+
               <table className="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Todo</th>
+                    <th scope="col">
+                      <div className="input-group mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder={
+                            "Add " + this.state.user.name + "'s to-do"
+                          }
+                          value={this.state.todo}
+                          onChange={this.onChangeTodo}
+                          aria-label="Recipient's username"
+                          aria-describedby="basic-addon2"
+                        />
+                        <div className="input-group-append">
+                          <button
+                            className="btn btn-outline-secondary"
+                            type="button"
+                            onClick={this.createTodo}
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -84,6 +134,7 @@ export default class Home extends Component {
                       <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{todo.name}</td>
+                        <td></td>
                       </tr>
                     ))}
                 </tbody>
