@@ -51,37 +51,39 @@ export default class Login extends Component {
     return (
       <>
         <div className="container">
-          <h3>Login</h3>
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <label>Email: </label>
-              <input
-                type="text"
-                required
-                className="form-control"
-                value={this.state.email}
-                onChange={this.onChangeEmail}
-              />
-            </div>
-            <div className="form-group">
-              <label>Password: </label>
-              <input
-                type="password"
-                required
-                className="form-control"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="submit"
-                required
-                className="btn btn-primary"
-                value="Login"
-              />
-            </div>
-          </form>
+          <div className="row justify-content-md-center">
+            <h3>Login</h3>
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <label>Email: </label>
+                <input
+                  type="text"
+                  required
+                  className="form-control"
+                  value={this.state.email}
+                  onChange={this.onChangeEmail}
+                />
+              </div>
+              <div className="form-group">
+                <label>Password: </label>
+                <input
+                  type="password"
+                  required
+                  className="form-control"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="submit"
+                  required
+                  className="btn btn-primary"
+                  value="Login"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </>
     );
