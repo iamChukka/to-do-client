@@ -29,7 +29,7 @@ export default class Home extends Component {
     const accessToken = localStorage.getItem("token");
     //console.log("This is the access token: " + accessToken);
     axios
-      .get("http://localhost:3001/api/users/me", {
+      .get("https://chukkabuilds-to-do.herokuapp.com/api/users/me", {
         headers: {
           "x-auth-token": accessToken,
         },
@@ -50,7 +50,7 @@ export default class Home extends Component {
   getTable() {
     const accessToken = localStorage.getItem("token");
     axios
-      .get("http://localhost:3001/api/todos", {
+      .get("https://chukkabuilds-to-do.herokuapp.com/api/todos", {
         headers: {
           "x-auth-token": accessToken,
         },
@@ -71,7 +71,8 @@ export default class Home extends Component {
       name: this.state.todo,
     };
     axios
-      .post("http://localhost:3001/api/todos", todo, {
+      .post("https://chukkabuilds-to-do.herokuapp.com/api/todos", todo, {
+        //.post("http://localhost:3001/api/todos", todo, {
         headers: {
           "x-auth-token": accessToken,
         },

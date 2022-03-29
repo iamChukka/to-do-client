@@ -38,7 +38,7 @@ export default class Login extends Component {
     console.log(login);
 
     axios
-      .post("http://localhost:3001/api/auth", login)
+      .post("https://chukkabuilds-to-do.herokuapp.com/api/auth", login)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data);
