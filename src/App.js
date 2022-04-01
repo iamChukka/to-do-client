@@ -10,20 +10,22 @@ import Login from "./components/login.component";
 
 function App() {
   return (
-    <div className="container">
+    <>
       <Navbar />
-      <br />
+      <div className="container">
+        <br />
 
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        {/* 
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          {/* 
       <Route path="/" exact component={}/>
       <Route path="/" exact component={}/>
- */}
-      </Routes>
-    </div>
+    */}
+        </Routes>
+      </div>
+    </>
   );
 }
 

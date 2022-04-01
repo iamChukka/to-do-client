@@ -1,3 +1,5 @@
+//require("dotenv").config();
+
 import React, { Component } from "react";
 import axios from "axios";
 
@@ -42,7 +44,7 @@ export default class Register extends Component {
 
     console.log(user);
     axios
-      .post("https://chukkabuilds-to-do.herokuapp.com/api/users", user)
+      .post(process.env.REACT_APP_BACKEND_URL + "/api/users", user)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response));
     window.location = "/";

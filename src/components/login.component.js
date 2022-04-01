@@ -1,3 +1,5 @@
+//require("dotenv").config();
+
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 
@@ -38,7 +40,7 @@ export default class Login extends Component {
     console.log(login);
 
     axios
-      .post("https://chukkabuilds-to-do.herokuapp.com/api/auth", login)
+      .post(process.env.REACT_APP_BACKEND_URL + "/api/auth", login)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data);

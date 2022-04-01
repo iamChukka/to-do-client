@@ -1,3 +1,5 @@
+//require("dotenv").config();
+
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -29,7 +31,7 @@ export default class Home extends Component {
     const accessToken = localStorage.getItem("token");
     //console.log("This is the access token: " + accessToken);
     axios
-      .get("https://chukkabuilds-to-do.herokuapp.com/api/users/me", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/api/users/me", {
         headers: {
           "x-auth-token": accessToken,
         },
@@ -44,13 +46,14 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    console.log(process.env.REACT_APP_BACKEND_URL);
     this.getUser();
     this.getTable();
   }
   getTable() {
     const accessToken = localStorage.getItem("token");
     axios
-      .get("https://chukkabuilds-to-do.herokuapp.com/api/todos", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/api/todos", {
         headers: {
           "x-auth-token": accessToken,
         },
@@ -71,7 +74,7 @@ export default class Home extends Component {
       name: this.state.todo,
     };
     axios
-      .post("https://chukkabuilds-to-do.herokuapp.com/api/todos", todo, {
+      .post(process.env.REACT_APP_BACKEND_URL + "/api/todos", todo, {
         //.post("http://localhost:3001/api/todos", todo, {
         headers: {
           "x-auth-token": accessToken,
