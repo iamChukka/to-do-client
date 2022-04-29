@@ -4,9 +4,12 @@ import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 
 import React, { Component } from "react";
-
-export default class Login extends Component {
-  constructor(props) {
+type LoginState = {
+  email: string;
+  password: string;
+};
+export default class Login extends Component<any, LoginState> {
+  constructor(props: any) {
     super(props);
 
     this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -19,17 +22,17 @@ export default class Login extends Component {
     };
   }
 
-  onChangePassword(e) {
+  onChangePassword(e: any) {
     this.setState({
       password: e.target.value,
     });
   }
-  onChangeEmail(e) {
+  onChangeEmail(e: any) {
     this.setState({
       email: e.target.value,
     });
   }
-  onSubmit(e) {
+  onSubmit(e: any) {
     e.preventDefault();
 
     const login = {
@@ -44,7 +47,7 @@ export default class Login extends Component {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data);
-        window.location = "/";
+        window.location.href = "/";
       })
       .catch((err) => console.log(err.response));
   }

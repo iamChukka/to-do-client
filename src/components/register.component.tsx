@@ -2,9 +2,13 @@
 
 import React, { Component } from "react";
 import axios from "axios";
-
-export default class Register extends Component {
-  constructor(props) {
+type RegisterState = {
+  name: string;
+  email: string;
+  password: string;
+};
+export default class Register extends Component<any, RegisterState> {
+  constructor(props: any) {
     super(props);
 
     this.onChangeName = this.onChangeName.bind(this);
@@ -18,22 +22,22 @@ export default class Register extends Component {
       password: "",
     };
   }
-  onChangeName(e) {
+  onChangeName(e: any) {
     this.setState({
       name: e.target.value,
     });
   }
-  onChangePassword(e) {
+  onChangePassword(e: any) {
     this.setState({
       password: e.target.value,
     });
   }
-  onChangeEmail(e) {
+  onChangeEmail(e: any) {
     this.setState({
       email: e.target.value,
     });
   }
-  onSubmit(e) {
+  onSubmit(e: any) {
     e.preventDefault();
 
     const user = {
@@ -47,7 +51,7 @@ export default class Register extends Component {
       .post(process.env.REACT_APP_BACKEND_URL + "/api/users", user)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response));
-    window.location = "/";
+    window.location.href = "/";
   }
   render() {
     return (

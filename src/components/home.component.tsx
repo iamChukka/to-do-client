@@ -3,9 +3,13 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
-export default class Home extends Component {
-  constructor(props) {
+type HomeState = {
+  user: { [key: string]: any } | null;
+  table: { [key: string]: any } | null;
+  todo: string;
+};
+export default class Home extends Component<any, HomeState> {
+  constructor(props: any) {
     super(props);
     this.getUser = this.getUser.bind(this);
     this.getTable = this.getTable.bind(this);
@@ -20,15 +24,15 @@ export default class Home extends Component {
   }
 
   onLogout() {
-    const removeToken = null;
+    const removeToken = "";
     localStorage.setItem("token", removeToken);
     console.log("We have removed Access Token");
 
-    window.location = "/";
+    window.location.href = "/";
   }
 
   getUser() {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = localStorage.getItem("token") || "";
     //console.log("This is the access token: " + accessToken);
     axios
       .get(process.env.REACT_APP_BACKEND_URL + "/api/users/me", {
@@ -51,7 +55,7 @@ export default class Home extends Component {
     this.getTable();
   }
   getTable() {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = localStorage.getItem("token") || "";
     axios
       .get(process.env.REACT_APP_BACKEND_URL + "/api/todos", {
         headers: {
@@ -69,7 +73,7 @@ export default class Home extends Component {
   }
 
   createTodo() {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = localStorage.getItem("token") || "";
     const todo = {
       name: this.state.todo,
     };
@@ -84,9 +88,9 @@ export default class Home extends Component {
         console.log(res.data);
       })
       .catch((error) => console.log(error.response));
-    window.location = "/";
+    window.location.href = "/";
   }
-  onChangeTodo(e) {
+  onChangeTodo(e: any) {
     this.setState({
       todo: e.target.value,
     });
@@ -134,7 +138,7 @@ export default class Home extends Component {
                 </thead>
                 <tbody>
                   {this.state.table &&
-                    this.state.table.map((todo, index) => (
+                    this.state.table.map((todo: any, index: number) => (
                       <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{todo.name}</td>
