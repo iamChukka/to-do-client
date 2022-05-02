@@ -45,8 +45,8 @@ export default class Login extends Component<any, LoginState> {
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/api/auth", login)
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("token", res.data);
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
         window.location.href = "/";
       })
       .catch((err) => console.log(err.response));
